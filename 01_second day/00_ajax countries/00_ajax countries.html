@@ -43,7 +43,7 @@
         fetch(" https://restcountries.eu/rest/v2/all?fields=name")
             .then(res => { return res.json(); })
             .then(content => {
-                var num = Math.floor(Math.random() * 249) + 1;
+                var num = getRandomNumber(249);
                 document.getElementById("h1selectedCountry").innerHTML = `The Details Of The Country ${content[num].name} Are:`;
                 return content
             })
