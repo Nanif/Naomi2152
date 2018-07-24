@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+</head>
+
+<style>
+    .row {
+        margin-top: 70px;
+    }
+
+    #btnGetCountry {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    function apendListCountries(allCountries) {
+        for (var item in allCountries) {
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(item[name]);
+            node.appendChild(textnode);
+            document.getElementById("listOfCountries").appendChild(node);
+
+        };
+    }
+    function apendListItem(selectedCountry) {
+        for (var property in selectedCountry[0]) {
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(selectedCountry[0][property]);
+            node.appendChild(textnode);
+            document.getElementById("selectedListPeoperties").appendChild(node);
+
+        };
+    }
+
+    function getCountries() {
+        //function fetch returns Promise<Response>
+        fetch(" https://restcountries.eu/rest/v2/all?fields=name")
+            .then(res => { return res.json(); })
+            .then(content => { Math.floor(Math.random() * 249) + 1; return content })
+            .then(content => {
+                apendListCountries(content)
+                fetch("https://restcountries.eu/rest/v2/name/" + content[0].name)
+                    .then(res => { return res.json() })
+                    .then(content => apendListItem(content))
+            });
+    }
+
+    function getRandomNumber(maxNum) {
+        let num = Math.floor((Math.random() * maxNum) + 1);
+        return num;
+    }
+
+</script>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-3">
+                <div class="form-group">
+                    <input type="butten" placeholder="click me to see details of random ncountry" onclick="getCountries()" class="btn btn-light"
+                        id="btnGetCountry">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>The All Countries List</h1>
+                <ul id="listOfCountries"> </ul>
+            </div>
+            <div class="col-sm-6">
+                <h1>The Selected Country List</h1>
+
+                <ul id="selectedListPeoperties"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
