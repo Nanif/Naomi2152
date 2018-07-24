@@ -25,6 +25,7 @@
             document.getElementById("listOfCountries").appendChild(node);
         };
     }
+
     function apendListItem(selectedCountry) {
         for (var property in selectedCountry[0]) {
             var node = document.createElement("LI");
@@ -39,7 +40,11 @@
         //function fetch returns Promise<Response>
         fetch(" https://restcountries.eu/rest/v2/all?fields=name")
             .then(res => { return res.json(); })
-            .then(content => { Math.floor(Math.random() * 249) + 1; return content })
+            .then(content => {
+                var num = Math.floor(Math.random() * 249) + 1;
+                document.getElementById("h1selectedCountry").innerHTML = `The Details Of The Country ${content[num].name} are:`;
+                return content
+            })
             .then(content => {
                 apendListCountries(content)
                 fetch("https://restcountries.eu/rest/v2/name/" + content[0].name)
@@ -71,8 +76,7 @@
                 <ul id="listOfCountries"> </ul>
             </div>
             <div class="col-sm-6">
-                <h1>The Selected Country List</h1>
-
+                <h1 id="h1selectedCountry"></h1>
                 <ul id="selectedListPeoperties"></ul>
             </div>
         </div>
