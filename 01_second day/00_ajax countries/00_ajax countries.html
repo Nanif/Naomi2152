@@ -7,6 +7,9 @@
 </head>
 
 <style>
+    body{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
     .row {
         margin-top: 70px;
     }
@@ -37,12 +40,11 @@
     }
 
     function getCountries() {
-        //function fetch returns Promise<Response>
         fetch(" https://restcountries.eu/rest/v2/all?fields=name")
             .then(res => { return res.json(); })
             .then(content => {
                 var num = Math.floor(Math.random() * 249) + 1;
-                document.getElementById("h1selectedCountry").innerHTML = `The Details Of The Country ${content[num].name} are:`;
+                document.getElementById("h1selectedCountry").innerHTML = `The Details Of The Country ${content[num].name} Are:`;
                 return content
             })
             .then(content => {
@@ -62,17 +64,24 @@
 
 <body>
     <div class="container">
+        <div class="page-header">
+            <h1>
+                Async In JavaScript
+                <small>by Naomi Fishbein</small>
+            </h1>
+        </div>
+        <hr>
         <div class="row">
+
             <div class="col-sm-6 offset-3">
                 <div class="form-group">
-                    <input type="butten" placeholder="click me to see details of random ncountry" onclick="getCountries()" class="btn btn-light"
-                        id="btnGetCountry">
+                    <input type="butten" placeholder="click me" onclick="getCountries()" class="btn btn-light" id="btnGetCountry">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <h1>The All Countries List</h1>
+                <h1>The All Countries Names Are:</h1>
                 <ul id="listOfCountries"> </ul>
             </div>
             <div class="col-sm-6">
