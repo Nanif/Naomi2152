@@ -20,10 +20,9 @@
     function apendListCountries(allCountries) {
         for (var item in allCountries) {
             var node = document.createElement("LI");
-            var textnode = document.createTextNode(item[name]);
+            var textnode = document.createTextNode(allCountries[item].name);
             node.appendChild(textnode);
             document.getElementById("listOfCountries").appendChild(node);
-
         };
     }
     function apendListItem(selectedCountry) {
